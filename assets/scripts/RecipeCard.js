@@ -160,9 +160,6 @@ class RecipeCard extends HTMLElement {
     ingredientsP.className = "ingredients";
     ingredientsP.appendChild(ingredientsText);
     card.append(ingredientsP);
-
-    console.log(getIngredients(data));
-
   }
 }
 
