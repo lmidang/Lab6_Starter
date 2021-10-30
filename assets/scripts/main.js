@@ -74,10 +74,13 @@ function createRecipeCards() {
   // Part 1 Expose - TODO
   var mainElement = document.getElementsByTagName("main")[0];
   let keys = Object.keys(recipeData);
-  for (var i = 0; i < 3; i++) {
-    const recipeCard = document.createElement('recipe-card');
-    recipeCard.data =  recipeData[keys[i]];
-    mainElement.appendChild(recipeCard);
+  for (var i = 0; i < keys.length; i++) {
+    if (keys[i].includes("https://introweb.tech/assets/json")) {
+      const recipeCard = document.createElement('recipe-card');
+      recipeCard.data =  recipeData[keys[i]];
+      mainElement.appendChild(recipeCard);
+  
+    }
   }
 }
 
@@ -97,10 +100,12 @@ function bindShowMore() {
   buttonElem.addEventListener("click", event=> {
     if (buttonElem.textContent == "Show more") {
       buttonElem.textContent = "Show less";
-      for (let i = 3; i < keys.length; i++) {
-        const recipeCard = document.createElement('recipe-card');
-        recipeCard.data =  recipeData[keys[i]];
-        mainElement.appendChild(recipeCard);
+      for (let i = 0; i < keys.length; i++) {
+        if (!keys[i].includes("https://introweb.tech/assets/json")) {
+          const recipeCard = document.createElement('recipe-card');
+          recipeCard.data =  recipeData[keys[i]];
+          mainElement.appendChild(recipeCard);
+        }
       }
     } else {
       while(mainElement.getElementsByTagName('recipe-card').length > 3) {
