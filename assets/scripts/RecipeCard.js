@@ -136,7 +136,7 @@ class RecipeCard extends HTMLElement {
       const ratingNumReviews = document.createElement('span');
       ratingAvgText = document.createTextNode(rating);
       const ratingReviewsText = document.createTextNode(getNumReviews(data));
-      const ratingImgSource = "/assets/images/icons/" + parseInt(rating) + "-star.svg";
+      const ratingImgSource = "assets/images/icons/" + parseInt(rating) + "-star.svg";
       ratingDiv.className = "rating";
       ratingImg.setAttribute("src", ratingImgSource);
       ratingImg.setAttribute("alt", rating + " stars");
@@ -297,6 +297,9 @@ function getOrganization(data) {
       if (data['@graph'][i]['@type'] == 'Organization') {
         return data['@graph'][i].name;
       }
+      if (data['@graph'][i]['@type'] == 'WebSite') {
+        return data['@graph'][i].name;
+      }
     }
   };
   return null;
@@ -368,9 +371,11 @@ function createIngredientList(ingredientArr) {
   ingredientArr.forEach(ingredient => {
     //ingredient = _removeParenthesis(ingredient);
     //ingredient = _removeExtraCommas(ingredient);
-    ingredient = _removeQtyAndMeasurement(ingredient);
     //ingredient = ingredient.replace("&nbsp;", "");
     //ingredient = ingredient.replaceAll("*", "");
+    ingredient = _removeQtyAndMeasurement(ingredient);
+    ingredient = ingredient.replaceAll("<p>", "");
+    ingredient = ingredient.replaceAll("</p>", "");
     finalIngredientList += `${ingredient}, `;
   });
 
