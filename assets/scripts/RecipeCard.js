@@ -136,7 +136,7 @@ class RecipeCard extends HTMLElement {
       const ratingNumReviews = document.createElement('span');
       ratingAvgText = document.createTextNode(rating);
       const ratingReviewsText = document.createTextNode(getNumReviews(data));
-      const ratingImgSource = "assets/images/icons/" + parseInt(rating) + "-star.svg";
+      const ratingImgSource = "assets/images/icons/" + Math.round(rating) + "-star.svg";
       ratingDiv.className = "rating";
       ratingImg.setAttribute("src", ratingImgSource);
       ratingImg.setAttribute("alt", rating + " stars");
